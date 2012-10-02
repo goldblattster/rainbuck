@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 require 'pathname'
+require 'rubygems'
 
 me = Pathname.new(__FILE__).realpath
 $:.unshift File.expand_path('../../lib', me)
-
 
 require 'rainbuck/cli'
 
