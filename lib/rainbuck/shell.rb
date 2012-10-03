@@ -1,16 +1,16 @@
 require 'rainbuck'
 
 class Rainbuck::Shell
-  def initialize()
-    @lines = 0
-    
-    #TODO: actually do stuff with line
-    $stdout.print "rainbuck:#{lines} | => "
+  def self.go()
+    lines = 0
+
+    $stdout.print "|rainbuck|:#{sprintf '%03d', lines} => "
 
     $stdin.each_line do |line|
-      @lines += 1
-      Rainbuck::Brainfuck.eval(line)
-      $stdout.print "rainbuck:#{lines} | => "
+      lines += 1
+      Rainbuck::Brainfuck.eval line
+
+      $stdout.print "|rainbuck|:#{sprintf '%03d', lines} => "
     end
   end
 end

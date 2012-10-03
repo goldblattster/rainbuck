@@ -7,4 +7,4 @@ $:.unshift File.expand_path('../../lib', me)
 
 require 'rainbuck/cli'
 
-Rainbuck::CLI.go(*ARGV)
+Rainbuck::CLI.go(ARGV)

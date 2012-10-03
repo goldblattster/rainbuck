@@ -27,17 +27,17 @@ class Rainbuck::Brainfuck
         bracket_count -= 1
       end
 
-      bracket_count < 0 && raise("Ending Bracket without opening, mismatch at #{ptr}") && exit
+      bracket_count < 0 && raise(Rainbuck::BrainFuckError, "Unopened bracket was closed @ bf:#{ptr}") && exit
       op.include? statement[ptr] && (cleaned.push statement[ptr]) && cleaned_ptr += 1
     end
 
-    !stack.empty? && raise("Opening Bracket without closing, mismatch at #{stack.pop}") && exit
+    !stack.empty? && raise(Rainbuck::BrainFuckError, "Opened bracket without closing @ bf:#{ptr}") && exit
 
     ptr = -1
 
     until (ptr += 1) == statement.length
       case cleaned[ptr]
-        when ?> then cell_ptr += 1 && cells[cell_ptr].nil? && cells[cell_ptr] = 0
+        when ?> then (cell_ptr += 1) && cells[cell_ptr].nil? && cells[cell_ptr] = 0
         when ?< then cell_ptr <= 1 ? cell_ptr = 0 : cell_ptr -= 1
         when ?+ then cells[cell_ptr] <= 254 ? cells[cell_ptr] += 1 : cells[cell_ptr] = 0
         when ?- then cells[cell_ptr] >= 1 ? cells[cell_ptr] -= 1 : cells[cell_ptr] = 255

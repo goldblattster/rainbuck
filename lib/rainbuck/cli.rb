@@ -18,13 +18,13 @@ class Rainbuck::CLI
     end
 
     if commands.length == 0
-      shell = Rainbuck::Shell
+      Rainbuck::Shell.go
     else
       if File.exist?(args[0])
-        script_interpreter = Rainbuck::Script(args[0])
+        script_interpreter = Rainbuck::Script args[0]
         script_interpreter.go
       else
-        Rainbuck::Brainfuck.eval(args[0])
+        Rainbuck::Brainfuck.eval args[0]
       end
     end
   end
